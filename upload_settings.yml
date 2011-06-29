@@ -1,0 +1,12 @@
+development:
+  host: ftp.skilldrick.co.uk
+  directory: /public_html/canvas
+
+ignored_prefixes:
+  - 'ignored_dir'
+  - 'upload_settings.yml'
+
+ignored_suffixes:
+  - '.swp'
+
+local_directory: 'test_files'
