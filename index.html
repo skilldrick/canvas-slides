@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  
+  <!--[if lt IE 9]>
+  <script src="lib/html5shim.js"></script>
+  <![endif]-->  
+  
+  <!-- These are some core styles the slideshow app requires -->
+  <link rel="stylesheet" href="lib/styles.css" />
+  
+  <!-- These are the styles you'll add to make the slides look great -->
+  <link rel="stylesheet" href="css/styles.css" />
+  
+  <title>Making a snake game in &lt;canvas&gt;</title>
+</head>
+<body>
+  <header>
+    <h1>Making a snake game in &lt;canvas&gt;</h1>
+    <nav>
+      <ul>
+        <li><button id="prev-btn" title="Previous slide">Previous Slide</button></li>
+        <li><span id="slide-number"></span>/<span id="slide-total"></span></li>
+        <li><button id="next-btn" title="Next Slide">Next Slide</button></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="deck">
+    
+    <!-- Begin slides -->
+    <section>
+      <hgroup>
+        <h1>Making a snake game in &lt;canvas&gt;</h1>
+      </hgroup>
+      <!--
+      <p>My girlfriend wrote this introduction to Canvas. Enjoy.</p>
+
+      <p>Canvas is one of the fun things in life. To wrap canvas around some
+      wood, you first need some good pine. Once you have a good frame work you
+      can start breeding your snake. To breed a snake suitable for gaming with
+      you need to start with some green fimo and some pva glue. Once you have
+      made a suitable snake you should then make another one with different
+      characteristics, to breed them together and make a Super Snake. Your new
+      Super Snake will be the ultimate gaming snake, perfect for following
+      instructions and making the game really fun. If you should happen to mix
+      in some red fimo your snake will have extra fire and the game will go
+      extra fast, and therefore it will be even funner. So, now you've got your
+      framework and Super Snake you're now ready to create a course for it to
+      shimmy around. The course should always be made from chopsticks, old
+      brussel sprouts and a bit of gin. The type of gin doesn't matter but
+      always use Japanese chopsticks, otherwise your course won't flow
+      well.</p>
+      -->
+    </section>
+    <section>
+      <hgroup>
+        <h1>The canvas element</h1>
+      </hgroup>
+
+      <ul>
+        <li class="action">A fixed-size HTML element</li>
+        <li class="action">Defines an area of the page that can be drawn on</li>
+        <li class="action">Can be transparent (used as an overlay)</li>
+        <li class="action">It's a blank canvas</li>
+      </ul>
+
+    </section>
+    <section>
+      <hgroup>
+        <h1>Getting the context</h1>
+      </hgroup>
+
+      <p>The canvas isn't used directly - you draw on an object called its
+      <code>context</code>.</p>
+
+      <p>The context is obtained by calling <code>getContext('2d')</code> on
+      the canvas element. (There may be a 3d canvas element in the future, but
+      for now all we have is 2d).</p>
+
+      <iframe class="fiddle" src="http://jsfiddle.net/skilldrick/DDVjU/1/embedded/"></iframe>
+
+    </section>
+    <section>
+      <hgroup>
+        <h1>Making a game loop</h1>
+      </hgroup>
+
+      <p>The game loop is a function that is called at a set interval, and updates the game.</p>
+
+      <ul>
+        <li>Update the game state</li>
+        <li>Update the display to reflect the new state</li>
+      </ul>
+
+      <iframe class="fiddle" src="http://jsfiddle.net/skilldrick/V9ttA/embedded/"></iframe>
+
+    </section>
+    <section>
+      <hgroup>
+        <h1>Drawing a snake</h1>
+        <h2>Part 1</h2>
+      </hgroup>
+
+      <p>The snake is drawn as a collection of squares. It's represented as an
+      array of co-ordinates, with the head at the beginning.</p>
+
+      <p>Each frame adds a new position to the front of the snake and removes
+      the last one.</p>
+
+      <p>Each time round the game loop:</p>
+
+      <ul>
+        <li><code>snake.advance()</code> is called to move the snake</li>
+        <li><code>snake.draw()</code> is called to draw the snake on the canvas.</li>
+        <li><code>draw()</code> calls <code>drawSection</code> which draws each square</li>
+      </ul>
+
+    </section>
+    <section>
+      <hgroup>
+        <h1>Drawing a snake</h1>
+        <h2>Part 2</h2>
+      </hgroup>
+
+      <p>Calling <code>context.save()</code> and <code>context.restore()</code>
+      saves and restores the canvas settings, including fillStyle.</p>
+
+      <iframe class="fiddle" src="http://jsfiddle.net/skilldrick/t6RPY/embedded/"></iframe>
+
+    </section>
+    <section>
+      <hgroup>
+        <h1>Moving the snake</h1>
+      </hgroup>
+
+      <ul>
+        <li>Check for direction keydowns</li>
+        <li>Set the new direction on the snake</li>
+        <li>Check new direction is valid</li>
+      </ul>
+
+      <iframe class="fiddle" src="http://jsfiddle.net/skilldrick/eVPzu/1/embedded/"></iframe>
+
+    </section>
+    <section>
+      <hgroup>
+        <h1>Adding an apple</h1>
+      </hgroup>
+
+      <p>The apple is drawn as a circle. To create a circle in canvas, call on the context:
+      <ul>
+        <li><code>beginPath()</code></li>
+        <li><code>arc(x, y, radius, startAngle, endAngle, antiClockwise?)</code></li>
+        <li><code>fill()</code></li>
+      </ul>
+
+      <iframe class="fiddle" src="http://jsfiddle.net/skilldrick/p6v9Z/embedded/"></iframe>
+
+    </section>
+    <section>
+      <hgroup>
+        <h1>Moving the snake</h1>
+      </hgroup>
+
+    </section>
+    <!-- /End slides -->
+    
+  </div>
+  <!-- /deck -->
+  <script src="lib/jquery-1.5.2.min.js"></script>
+  <script src="lib/jquery.jswipe-0.1.2.js"></script>  
+  <script src="lib/htmlSlides.js"></script>
+  <script>
+    //Do our business when the DOM is ready for us
+    $(function() {
+
+      //One little option: hideToolbar (boolean; default = false)
+      htmlSlides.init({ hideToolbar: true });
+      
+    });
+  </script>
+  </body>
+</html>
