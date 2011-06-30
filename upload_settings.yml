@@ -9,4 +9,4 @@ ignored_prefixes:
 ignored_suffixes:
   - '.swp'
 
-local_directory: 'test_files'
+local_directory: '.'
